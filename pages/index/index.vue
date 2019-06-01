@@ -11,7 +11,7 @@
 	export default {
 		data() {
 			return {
-				title:'4545'
+				title:'45二二45'
 			}
 		},
 		onLoad() {
