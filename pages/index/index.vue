@@ -11,7 +11,7 @@
 	export default {
 		data() {
 			return {
-				title:'zhuzhu'
+				title:'4545'
 			}
 		},
 		onLoad() {
