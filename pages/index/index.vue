@@ -11,7 +11,7 @@
 	export default {
 		data() {
 			return {
-				title: 'sdfsdfsd'
+				title: 'nishi'
 			}
 		},
 		onLoad() {
