@@ -1,9 +1,11 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view>
-			<text class="title">{{title}}</text>
+	<view>
+		<view class="whCenter searchBody">
+			<input class="inputText" v-model="searchName" @input='isShow' type="text" value="" placeholder="搜索"
+			 placeholder-style="color:#d6d6d6;" />
+			<i class="clearInput" @click="clearInput" v-show='show'></i>
 		</view>
+		<view>{{searchName}}</view>
 	</view>
 </template>
 
@@ -11,32 +13,80 @@
 	export default {
 		data() {
 			return {
-				title:'Hello'
+				searchName: '',
+				show: false
+
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
+			/* toDetail() {
+				uni.navigateTo({
+					url: '../detail/detail'
+				})
+			}, */
+			isShow() {
+				if (this.searchName != '') {
+					this.show = true
+				} else {
+					this.show = false
+				}
+			},
+			clearInput() {
+				this.searchName = '';
+				this.show = false;
+			}
+
 
 		}
 	}
 </script>
 
 <style>
-	.content {
-		text-align: center;
-		height: 400upx;
+	.whCenter {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
-	.logo {
-		height: 200upx;
-		width: 200upx;
-		margin-top: 200upx;
+	.wCenter {
+		display: flex;
+		justify-content: center;
 	}
 
-	.title {
-		font-size: 36upx;
-		color: #8f8f94;
+	.hCenter {
+		display: flex;
+		align-items: center;
+	}
+
+	.searchBody {
+		position: relative;
+		height: 100upx;
+		border-bottom: 1upx solid #d7d6dc;
+	}
+
+	.inputText {
+		width: 78%;
+		height: 68%;
+		text-align: left;
+		padding: 0 60upx 0 60upx;
+		border-radius: 10upx;
+		border: 1upx solid #e6e6ea;
+		font-size: 32upx;
+		background: url(../../static/search@2x.png) no-repeat 20upx center;
+		background-size: 28upx;
+		background-color: #ffffff;
+	}
+
+	.clearInput {
+		display: inline-block;
+		position: absolute;
+		width: 70upx;
+		height: 50%;
+		background: url(../../static/delete@2x.png) no-repeat center;
+		background-size: 28upx;
+		right: 24upx;
 	}
 </style>
