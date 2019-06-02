@@ -5,6 +5,11 @@
 			 placeholder-style="color:#d6d6d6;" />
 			<i class="clearInput" @click="clearInput" v-show='show'></i>
 		</view>
+		<view class="whCenter" style='margin-top: 30%'>
+			<view class="whCenter itemStyle" v-for="item in subjects">
+				<text>{{item.name}}</text>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -13,8 +18,17 @@
 		data() {
 			return {
 				searchName: '',
-				show: false
-
+				show: false,
+				subjects: [{
+						name: '数学'
+					},
+					{
+						name: '物理'
+					},
+					{
+						name: '化学'
+					}
+				]
 			}
 		},
 		onLoad() {
@@ -68,7 +82,7 @@
 
 	.inputText {
 		width: 78%;
-		height: 68%;
+		height: 68upx;
 		text-align: left;
 		padding: 0 60upx 0 60upx;
 		border-radius: 10upx;
@@ -87,5 +101,14 @@
 		background: url(../../static/delete@2x.png) no-repeat center;
 		background-size: 28upx;
 		right: 24upx;
+	}
+
+	.itemStyle {
+		width: 200upx;
+		height: 300upx;
+		background-color: #fff;
+		margin-right: 24upx;
+		box-shadow: 0 15upx 30upx rgba(0,0,0,0.1);
+		/* transform: translate3d(0,-2upx,0); */
 	}
 </style>
