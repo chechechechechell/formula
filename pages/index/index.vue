@@ -5,7 +5,6 @@
 			 placeholder-style="color:#d6d6d6;" />
 			<i class="clearInput" @click="clearInput" v-show='show'></i>
 		</view>
-		<view>{{searchName}}</view>
 	</view>
 </template>
 
@@ -22,11 +21,11 @@
 
 		},
 		methods: {
-			/* toDetail() {
+			toDetail() {
 				uni.navigateTo({
 					url: '../detail/detail'
 				})
-			}, */
+			},
 			isShow() {
 				if (this.searchName != '') {
 					this.show = true
