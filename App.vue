@@ -17,4 +17,19 @@
 	page{
 		background-color: #f5f5f5;
 	}
+	.whCenter {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.wCenter {
+		display: flex;
+		justify-content: center;
+	}
+	
+	.hCenter {
+		display: flex;
+		align-items: center;
+	}
 </style>

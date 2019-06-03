@@ -9,10 +9,10 @@
 			} 
 		},
 		{
-			"path": "pages/detail/detail",
+			"path": "pages/mathematics/mathematics",
 			"style": {
 				// "navigationBarTitleText": "uni-app"
-				"navigationBarTitleText": "详情页",
+				"navigationBarTitleText": "数学",
 				"backgroundColor": "#f5f5f5"
 			}
 		},

@@ -8,6 +8,9 @@
 		<view class="whCenter" style='margin-top: 30%'>
 			<view class="whCenter itemStyle" v-for="item in subjects">
 				<text>{{item.name}}</text>
+				<!-- <navigator :url="{{item.methods}}" hover-class="navigator-hover">
+                    <button type="default">跳转到新页面</button>
+                </navigator> -->
 			</view>
 		</view>
 	</view>
@@ -20,13 +23,23 @@
 				searchName: '',
 				show: false,
 				subjects: [{
-						name: '数学'
+						name: '数学',
+						// methods:'toMath'
+						// methods:'methods1'
+						methods:'../mathematics/mathematics'
 					},
 					{
-						name: '物理'
+						name: '物理',
+						// methods:'toPhysics'
+						// methods:'methods2',
+						methods:'../physics/physics'
+						
 					},
 					{
-						name: '化学'
+						name: '化学',
+						// methods:'toChemistry'
+						// methods:'methods3',
+						methods:'../chemistry/chemistry'
 					}
 				]
 			}
@@ -35,9 +48,19 @@
 
 		},
 		methods: {
-			toDetail() {
+			toMath() {
 				uni.navigateTo({
-					url: '../detail/detail'
+					url: '../mathematics/mathematics'
+				})
+			},
+			toPhysics() {
+				uni.navigateTo({
+					url: '../physics/physics'
+				})
+			},
+			toChemistry() {
+				uni.navigateTo({
+					url: '../chemistry/chemistry'
 				})
 			},
 			isShow() {
@@ -46,34 +69,17 @@
 				} else {
 					this.show = false
 				}
+				
 			},
 			clearInput() {
 				this.searchName = '';
 				this.show = false;
 			}
-
-
 		}
 	}
 </script>
 
 <style>
-	.whCenter {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.wCenter {
-		display: flex;
-		justify-content: center;
-	}
-
-	.hCenter {
-		display: flex;
-		align-items: center;
-	}
-
 	.searchBody {
 		position: relative;
 		height: 100upx;
@@ -98,9 +104,9 @@
 		position: absolute;
 		width: 70upx;
 		height: 50%;
-		background: url(../../static/delete@2x.png) no-repeat center;
-		background-size: 28upx;
-		right: 24upx;
+		background: url(../../static/clear.png) no-repeat center;
+		background-size: 34upx;
+		right: 30upx;
 	}
 
 	.itemStyle {
