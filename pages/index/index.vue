@@ -6,12 +6,9 @@
 			<i class="clearInput" @click="clearInput" v-show='show'></i>
 		</view>
 		<view class="whCenter" style='margin-top: 30%'>
-			<view class="whCenter itemStyle" v-for="item in subjects">
-				<text>{{item.name}}</text>
-				<!-- <navigator :url="{{item.methods}}" hover-class="navigator-hover">
-                    <button type="default">跳转到新页面</button>
-                </navigator> -->
-			</view>
+			<navigator :key='item.key' class="whCenter itemStyle" v-for="item in subjects" :url="item.methods" hover-class="none">
+                <button hover-class="btn-hover" >{{item.name}}</button>
+            </navigator>
 		</view>
 	</view>
 </template>
@@ -25,20 +22,16 @@
 				subjects: [{
 						name: '数学',
 						// methods:'toMath'
-						// methods:'methods1'
 						methods:'../mathematics/mathematics'
 					},
 					{
 						name: '物理',
 						// methods:'toPhysics'
-						// methods:'methods2',
 						methods:'../physics/physics'
-						
 					},
 					{
 						name: '化学',
 						// methods:'toChemistry'
-						// methods:'methods3',
 						methods:'../chemistry/chemistry'
 					}
 				]
@@ -51,16 +44,6 @@
 			toMath() {
 				uni.navigateTo({
 					url: '../mathematics/mathematics'
-				})
-			},
-			toPhysics() {
-				uni.navigateTo({
-					url: '../physics/physics'
-				})
-			},
-			toChemistry() {
-				uni.navigateTo({
-					url: '../chemistry/chemistry'
 				})
 			},
 			isShow() {

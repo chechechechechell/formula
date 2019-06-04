@@ -16,6 +16,7 @@
 	/*每个页面公共css */
 	page{
 		background-color: #f5f5f5;
+		color: #000000;
 	}
 	.whCenter {
 		display: flex;
@@ -32,4 +33,6 @@
 		display: flex;
 		align-items: center;
 	}
+	button::after{ border: none;} 
+	
 </style>
