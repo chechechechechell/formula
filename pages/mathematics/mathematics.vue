@@ -1,6 +1,6 @@
 <template>
 	<view class="whCenter">
-		<view class="wCenter" style="flex-direction: column;justify-content: flex-start;background-color: #FFFFFF;width: 94%;">
+		<view class="whCenter" style="flex-direction: column;background-color: #FFFFFF;width: 94%;">
 			<text>{{title}}</text>
 			<text>{{name}}</text>
 		</view>
@@ -12,7 +12,7 @@
 		data() {
 			return {
 				title:'Hello',
-				name:'zhuzhu'
+				name:'数学'
 			}
 		},
 		onLoad() {
