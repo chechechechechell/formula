@@ -33,6 +33,14 @@
 			}
 		},
 		{
+			"path": "pages/detail/detail",
+			"style": {
+				// "navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "详情",
+				"backgroundColor": "#f5f5f5"
+			}
+		},
+		{
 			"path": "pages/more/more",
 			"style": {
 				// "navigationBarTitleText": "uni-app"

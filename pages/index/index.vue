@@ -7,7 +7,7 @@
 		</view>
 		<view class="whCenter" style='margin-top: 30%'>
 			<navigator :key='item.key' class="whCenter itemStyle" v-for="item in subjects" :url="item.methods" hover-class="none">
-                <button hover-class="btn-hover" >{{item.name}}</button>
+                <button hover-class="btn-hover" style="background-color: #FFFFFF;" >{{item.name}}</button>
             </navigator>
 		</view>
 	</view>
@@ -19,7 +19,8 @@
 			return {
 				searchName: '',
 				show: false,
-				subjects: [{
+				subjects: [
+					{
 						name: '数学',
 						// methods:'toMath'
 						methods:'../mathematics/mathematics'
@@ -34,7 +35,7 @@
 						// methods:'toChemistry'
 						methods:'../chemistry/chemistry'
 					}
-				]
+				],
 			}
 		},
 		onLoad() {
@@ -73,13 +74,12 @@
 		width: 78%;
 		height: 68upx;
 		text-align: left;
-		padding: 0 60upx 0 60upx;
+		padding: 0 60upx;
 		border-radius: 10upx;
 		border: 1upx solid #e6e6ea;
 		font-size: 32upx;
-		background: url(../../static/search@2x.png) no-repeat 20upx center;
+		background: #ffffff url(../../static/search@2x.png) no-repeat 20upx center;
 		background-size: 28upx;
-		background-color: #ffffff;
 	}
 
 	.clearInput {
