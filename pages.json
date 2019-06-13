@@ -33,10 +33,26 @@
 			}
 		},
 		{
-			"path": "pages/detail/detail",
+			"path": "pages/mathDetail/mathDetail",
 			"style": {
 				// "navigationBarTitleText": "uni-app"
-				"navigationBarTitleText": "详情",
+				"navigationBarTitleText": "数学公式详情",
+				"backgroundColor": "#f5f5f5"
+			}
+		},
+		{
+			"path": "pages/chemistryDetail/chemistryDetail",
+			"style": {
+				// "navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "化学公式详情",
+				"backgroundColor": "#f5f5f5"
+			}
+		},
+		{
+			"path": "pages/physicsDetail/physicsDetail",
+			"style": {
+				// "navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "物理公式详情",
 				"backgroundColor": "#f5f5f5"
 			}
 		},

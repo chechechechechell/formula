@@ -6,7 +6,7 @@
 			<i class="clearInput" @click="clearInput" v-show='show'></i>
 		</view>
 		<view class="whCenter" style='margin-top: 30%'>
-			<navigator :key='item.key' class="whCenter itemStyle" v-for="item in subjects" :url="item.methods" hover-class="none">
+			<navigator :key='item.key' class="whCenter itemStyle" v-for="item in subjects" :url="item.url" hover-class="none">
                 <button hover-class="btn-hover" style="background-color: #FFFFFF;" >{{item.name}}</button>
             </navigator>
 		</view>
@@ -22,18 +22,15 @@
 				subjects: [
 					{
 						name: '数学',
-						// methods:'toMath'
-						methods:'../mathematics/mathematics'
+						url:'../mathematics/mathematics'
 					},
 					{
 						name: '物理',
-						// methods:'toPhysics'
-						methods:'../physics/physics'
+						url:'../physics/physics'
 					},
 					{
 						name: '化学',
-						// methods:'toChemistry'
-						methods:'../chemistry/chemistry'
+						url:'../chemistry/chemistry'
 					}
 				],
 			}
