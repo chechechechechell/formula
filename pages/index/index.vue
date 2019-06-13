@@ -1,10 +1,10 @@
 <template>
 	<view>
-		<view class="whCenter searchBody">
+<!-- 		<view class="whCenter searchBody">
 			<input class="inputText" v-model="searchName" @input='isShow' type="text" value="" placeholder="搜索"
 			 placeholder-style="color:#d6d6d6;" />
 			<i class="clearInput" @click="clearInput" v-show='show'></i>
-		</view>
+		</view> -->
 		<view class="whCenter" style='margin-top: 30%'>
 			<navigator :key='item.key' class="whCenter itemStyle" v-for="item in subjects" :url="item.url" hover-class="none">
                 <button hover-class="btn-hover" style="background-color: #FFFFFF;" >{{item.name}}</button>
