@@ -1,7 +1,7 @@
 <template>
 	<view class="whCenter" style="flex-direction: column;">
 		<view class="wCenter" style="flex-direction: column;width: 94%;padding: 0 0 50upx;">
-			<image src="../../static/book.jpg" mode="aspectFit" style="width: 120upx;height: 100upx;margin: 50upx auto 30upx;"></image>
+			<image src="../../static/book.png" mode="aspectFit" style="width: 120upx;height: 100upx;margin: 50upx auto 30upx;"></image>
 			<navigator :key="index" class="" v-for="(item,index) in juniorPhysics" :url="'../physicsDetail/physicsDetail?id='+index" hover-class="none" style="margin-top: 18upx;">
 				<button hover-class="btn-hover" style="background-color: #FFFFFF;text-align: left;">
 					<text style="color:#666;padding-right: 26upx;width: 80upx;display: inline-block;">1.{{index}}</text>
