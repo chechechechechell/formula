@@ -34,7 +34,8 @@
 			onShareAppMessage() {
 				return {
 					title: '公式大全2',
-					path: '/pages/index/index'
+					path: '/pages/index/index',
+					imageUrl:'../../static/shareImg.png'
 				}
 			},
 		},
