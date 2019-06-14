@@ -1,6 +1,5 @@
 <template>
 	<view>
-		<guide v-if="showGuide">awerfawe</guide>
 		<button open-type="share">
 			<nx-cell icon="/static/share.png" border title="分享给好友"></nx-cell>
 		</button>
@@ -25,12 +24,6 @@
 			return {}
 		},
 		methods: {
-			tipAttention() {
-				this.showGuide = true;
-				setTimeout(() => {
-					this.showGuide = false;
-				}, 4000)
-			},
 			onShareAppMessage() {
 				return {
 					title: '公式大全2',
@@ -40,8 +33,7 @@
 			},
 		},
 		components: {
-			nxCell,
-			guide
+			nxCell
 		}
 	}
 </script>
