@@ -9,7 +9,7 @@
 		<view class="hCenter" style="color: #957B30;flex-direction: column;font-size: 26upx;position: fixed;bottom: 10upx;left: 20%;">
 			<!-- <text>『公式大全2』是一款查询各类公式的神器，现处于项目创建阶段，功能会逐步完善。</text>
 			<text>您的支持和反馈是我们最大的动力，喜欢可以加入我的小程序。 </text> -->
-			<text>©LuiLi啦啦啦作品 V1.0.0</text>
+			<text>©LuiLi55555作品 V1.0.0</text>
 			<text>本程序所有资料均来自互联网，仅供参考</text>
 		</view>
 	</view>
