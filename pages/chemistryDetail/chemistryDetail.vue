@@ -4,7 +4,7 @@
             <view class="content">
                 <view class="whCenter" style="flex-direction: column;margin-top: 50upx;">
 					<text class="" style="font-size: 40upx;">{{imgList[optionId].name}}</text>
-                    <image style="width: 90%;" mode="aspectFit" :src="imgList[optionId].src"></image>
+                    <image style="width: 100%;" mode="widthFix" :src="imgList[optionId].src"></image>
                 </view>
             </view>
         </view>
@@ -271,6 +271,36 @@
 					},{
 						src: '/static/chemistryJunior84.png',
 						name: '无水硫酸铜作干燥剂'
+					},{
+						src: '/static/chemistrySenior1.png',
+						name: '物质的量（mol）的计算公式'
+					},{
+						src: '/static/chemistrySenior2.png',
+						name: '溶液的计算公式'
+					},{
+						src: '/static/chemistrySenior3.png',
+						name: '溶解度的计算公式（溶质为不含结晶水的固体）'
+					},{
+						src: '/static/chemistrySenior4.png',
+						name: '平均摩尔质量或平均式量的计算公式'
+					},{
+						src: '/static/chemistrySenior5.png',
+						name: '化学反应速率的计算公式'
+					},{
+						src: '/static/chemistrySenior6.png',
+						name: '化学平衡计算公式'
+					},{
+						src: '/static/chemistrySenior7.png',
+						name: '溶液的pH值计算公式'
+					},{
+						src: '/static/chemistrySenior8.png',
+						name: '物质结构，元素周期律的计算公式'
+					},{
+						src: '/static/chemistrySenior9.png',
+						name: '烃的分子式的确定方法'
+					},{
+						src: '/static/chemistrySenior10.png',
+						name: '依含氧衍生物的相对分子质量求算其分子式的方法'
 					}
 				]
 			}
