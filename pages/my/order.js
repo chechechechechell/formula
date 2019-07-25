@@ -1174,6 +1174,9 @@ function getBookPayOrder() {
                     $(".payTypeTab .scoreNum").text("(剩余" + $(".payTypeTab .scoreNum").attr("data-num") + "积分)");
                     $(".yuNum").text($(".payTypeTab .scoreNum").attr("data-num"));
                     location.href = "orderSuccess.html?orderid=" + result.orderId;
+                } else if(result.status == 101){  // 这是所选择的车位被别人先预定了
+                    $('.msgText').text(result.message);
+                    $('.msgCover').show();
                 } else {
                     alert(result.message);
                 }
