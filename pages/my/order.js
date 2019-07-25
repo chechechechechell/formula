@@ -18,17 +18,11 @@ var parkSeq = sessionStorage.getItem('parkSeq'),
         couponidstr = "",
         couponid = sessionStorage.getItem("couponId"),
         openId = localStorage.getItem('openid'),
-        weekday = new Array(7)
-weekday[0] = "周日"
-weekday[1] = "周一"
-weekday[2] = "周二"
-weekday[3] = "周三"
-weekday[4] = "周四"
-weekday[5] = "周五"
-weekday[6] = "周六"
-str = month >= 10 ? month : '0' + month + '月' + (date >= 10 ? date : '0' + date) + '日',
+        weekday = new Array("周日", "周一", "周二", "周三", "周四", "周五", "周六"),
+        str = month >= 10 ? month : '0' + month + '月' + (date >= 10 ? date : '0' + date) + '日',
         date2 = new Date(mydate),
         arr1 = [];
+
 $(".phoneNum").val(mobile);
 
 //获得支付方式
