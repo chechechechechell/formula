@@ -1235,7 +1235,7 @@ var outTimeMap = GetRequest()['outTime'];
 
 console.log(dataType, dataName, dataId, inTimeMap);
 if (dataType != undefined && dataId != undefined && dataName != undefined) {
-    $('.toChoose').text(`${sessionStorage.getItem('dataFloorName')}层-${dataType} ${dataName}`);
+    $('.toChoose').text(`${sessionStorage.getItem('dataFloorName')}-${dataType} ${dataName}`);
 }
 // else{
 //     dataId = undefined;
