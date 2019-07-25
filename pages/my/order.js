@@ -351,6 +351,7 @@ $.ajax({
         if (result.status == 0) {
             var data = result.parkDetailsInfo;
             dataFloorName = data.floorName;
+            sessionStorage.setItem('dataFloorName',dataFloorName);
             $(".item-left .parkname").text(data.parkName);
             $(".item-left .address").text(data.parkAddress);
             // 如果停车场不支持在线选位，则不显示在线选位那一行
@@ -917,6 +918,10 @@ $(".tg_g_o .pay").click(function () {
                 } else {
                     $(".tg_g_o .pay").attr("data-btn", "0");
                 }
+            } else if(moneyPayOrder.status == 101){  // 这是车位被其他人预定了
+                $('.msgText').text(moneyPayOrder.message);
+                $('.msgCover').show();
+                $(".tg_g_o .pay").attr("data-btn", "0");
             } else {
                 alert(moneyPayOrder.message);
                 $(".tg_g_o .pay").attr("data-btn", "0");
@@ -1217,7 +1222,6 @@ function GetRequest() {
         }
     }
     return theRequest;
-    return theRequest;
 }
 
 var dataType = GetRequest()['dataType'];
@@ -1228,7 +1232,7 @@ var outTimeMap = GetRequest()['outTime'];
 
 console.log(dataType, dataName, dataId, inTimeMap);
 if (dataType != undefined && dataId != undefined && dataName != undefined) {
-    $('.toChoose').text(`${dataFloorName}层-${dataType} ${dataName}`)
+    $('.toChoose').text(`${sessionStorage.getItem('dataFloorName')}层-${dataType} ${dataName}`);
 }
 // else{
 //     dataId = undefined;
@@ -1249,4 +1253,9 @@ $(".chooseSpace").click(function () {
     // }else{  // 这表明已经选位，想重新选择(liuli)
     //     window.history.go(-1);
     // }
+});
+
+// 这是如果车位被别人先预定了，会弹出来提示框，点击知道了，关闭弹框。
+$('.msgKnow').click(function(){
+    $('.msgCover').hide();
 });
