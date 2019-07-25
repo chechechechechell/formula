@@ -24,6 +24,21 @@ var parkSeq = sessionStorage.getItem('parkSeq'),
         arr1 = [];
 
 $(".phoneNum").val(mobile);
+var toUrl;
+var city, lng, lat;
+
+if (sessionStorage.getItem('lng') == undefined || sessionStorage.getItem('lat') == undefined) {
+    get_ThisLocation(function (Res) {
+        city = Res.city;
+        lng = Res.lng;
+        lat = Res.lat;
+        sessionStorage.setItem('lng', lng);
+        sessionStorage.setItem('lat', lat);
+    });
+} else {
+    lng = sessionStorage.getItem('lng');
+    lat = sessionStorage.getItem('lat');
+}
 
 //获得支付方式
 function getPayType(yu, parkId, sharePrice) {
@@ -43,7 +58,7 @@ function getPayType(yu, parkId, sharePrice) {
                 if (tUserParkingSpacePrice.payType.indexOf("0") > -1) {
                     if (moren == 0) {
                         $(".orderBtn").attr("data-type", "0");
-                        $(".payTypePriceImg").attr("src", "img/wechat_icon.png");
+                        $(".payTypePriceImg").attr("src", "img/wechat_icon_v4.8@2x.png");
                         $(".payName").html("微信支付");
                         $(".scoreNum").hide();
                         $(".feePrice").html("<i>" + sharePrice + "</i>元");
@@ -59,7 +74,7 @@ function getPayType(yu, parkId, sharePrice) {
                     if (yu >= payIntegeration) {
                         if (moren == 0) {
                             $(".orderBtn").attr("data-type", "1-1");
-                            $(".payTypePriceImg").attr("src", "img/cridet.png");
+                            $(".payTypePriceImg").attr("src", "img/integral_v4.8@2x.png");
                             $(".payName").html("积分支付");
                             $(".scoreNum").show();
                             $(".feePrice").html("<i>" + payIntegeration + "</i>积分");
@@ -71,7 +86,7 @@ function getPayType(yu, parkId, sharePrice) {
                     } else {
                         if (moren == 0) {
                             $(".orderBtn").attr("data-type", "1-2");
-                            $(".payTypePriceImg").attr("src", "img/cridet.png");
+                            $(".payTypePriceImg").attr("src", "img/integral_v4.8@2x.png");
                             $(".payName").html("积分支付");
                             $(".scoreNum").show();
                             $(".feePrice").html("<i>" + payIntegeration + "</i>积分");
@@ -87,7 +102,7 @@ function getPayType(yu, parkId, sharePrice) {
                 if (tUserParkingSpacePrice.payType.indexOf("2") > -1) {
                     if (moren == 0) {
                         $(".orderBtn").attr("data-type", "2");
-                        $(".payTypePriceImg").attr("src", "img/Alipay@2x.png");
+                        $(".payTypePriceImg").attr("src", "img/Alipay_v4.8@2x.png");
                         $(".payName").html("支付宝支付");
                         $(".scoreNum").hide();
                         $(".feePrice").html("<i>" + sharePrice + "</i>元");
@@ -163,7 +178,7 @@ $(".close_tg_g_p").click(function () {
 $(".payTypeLine").click(function () {
     if ($(this).attr("data-id") == "0") {
         $(".orderBtn").attr("data-type", "0");
-        $(".payTypePriceImg").attr("src", "img/wechat_icon.png");
+        $(".payTypePriceImg").attr("src", "img/wechat_icon_v4.8@2x.png");
         $(".payName").html("微信支付");
         $(".scoreNum").hide();
         $(".feePrice").html("<i>" + $(this).attr("data-price") + "</i>元");
@@ -171,7 +186,7 @@ $(".payTypeLine").click(function () {
         $(this).find(".payCheckedImg").show();
     } else if ($(this).attr("data-id") == "1-1") {
         $(".orderBtn").attr("data-type", "1-1");
-        $(".payTypePriceImg").attr("src", "img/cridet.png");
+        $(".payTypePriceImg").attr("src", "img/integral_v4.8@2x.png");
         $(".payName").html("积分支付");
         $(".scoreNum").show();
         $(".feePrice").html("<i>" + $(this).attr("data-price") + "</i>积分");
@@ -179,14 +194,14 @@ $(".payTypeLine").click(function () {
         $(this).find(".payCheckedImg").show();
     } else if ($(this).attr("data-id") == "1-2") {
         $(".orderBtn").attr("data-type", "1-2");
-        $(".payTypePriceImg").attr("src", "img/cridet.png");
+        $(".payTypePriceImg").attr("src", "img/integral_v4.8@2x.png");
         $(".payName").html("积分支付");
         $(".scoreNum").show();
         $(".feePrice").html("<i>" + $(this).attr("data-price") + "</i>积分");
         $(this).parent().parent().find(".payCheckedImg").hide();
     } else if ($(this).attr("data-id") == "2") {
         $(".orderBtn").attr("data-type", "2");
-        $(".payTypePriceImg").attr("src", "img/Alipay@2x.png");
+        $(".payTypePriceImg").attr("src", "img/Alipay_v4.8@2x.png");
         $(".payName").html("支付宝支付");
         $(".scoreNum").hide();
         $(".feePrice").html("<i>" + $(this).attr("data-price") + "</i>元");
@@ -277,7 +292,6 @@ function getCredit() {
     });
 }
 
-
 getCredit();
 
 
@@ -320,21 +334,47 @@ function getcar(indc) {
 
 getcar(1);
 
+var dataFloorName;
 
 //获得停车场详情
 $.ajax({
     type: "post",
-    url: url + "park/getParkDetailsInfo.do",
+    // url: url + "park/getParkDetailsInfo.do",
+    url: url + "park/getParkDetailsInfo",
     async: true,
     data: {
         parkSeq: parkSeq,
+        lng: lng,
+        lat: lat
     },
     success: function (result) {
-        //当前是写死的一个停车场
-        var data = result.parkDetailsInfo;
-        $(".item-left .parkname").text(data.parkName);
-        $(".item-left .address").text(data.parkAddress);
-        ajaxNum++;
+        if (result.status == 0) {
+            var data = result.parkDetailsInfo;
+            dataFloorName = data.floorName;
+            $(".item-left .parkname").text(data.parkName);
+            $(".item-left .address").text(data.parkAddress);
+            // 如果停车场不支持在线选位，则不显示在线选位那一行
+            // 如果停车场支持在线选位并支持列表和地图，优先地图
+            if ($('.fee').css('display') == 'block') {
+                if (data.isOnlineSelectLocation == 1) { //0不支持在线选位，1支持在线选位
+                    $('.chooseSpaceLine').show();
+                    if (data.isMapSelectLocation == 1) {  //0不支持地图，1支持地图
+                        toUrl = 'chooseByMap'
+                    } else {
+                        toUrl = 'chooseByList'
+                    }
+                } else {
+                    $('.chooseSpaceLine').hide();
+                }
+            } else {
+                $('.chooseSpaceLine').hide();
+            }
+
+            ajaxNum++;
+        } else {
+            alert(result.message);
+        }
+
     }
 });
 
@@ -370,6 +410,7 @@ $(".line .carName").click(function (e) {
 });
 
 
+// 获得优惠券
 if (couponid != "" && couponid != undefined && couponid != null) {
     //获得一张优惠券
     $.ajax({
@@ -671,8 +712,8 @@ function newTime() {
     if (j_hour < 10) {
         newj_hour = 10;
         newj_min = "00";
-//		$('.NotificationBox').css("top","0");
-//		$('.NotificationBox').show();
+        // $('.NotificationBox').css("top", "0");
+        // $('.NotificationBox').show();
     } else {
         if (j_min >= 55) {
             newj_hour = (j_hour + 1) >= 10 ? (j_hour + 1) : "0" + (j_hour + 1);
@@ -708,6 +749,8 @@ $('.s_t').change(function () {
             mint = ks_time.split(" ")[2];
     $(this).find(".timei").text(year + "-" + mont + "-" + aday + " " + hour + ":" + mint);
     sessionStorage.setItem("s_t", year + "-" + mont + "-" + aday + " " + hour + ":" + mint);
+    dataId = undefined;
+    $('.toChoose').text('系统自动分配');
     stat = sessionStorage.getItem("s_t");
     $(this).find(".timei").addClass('changeI');
     if (($(".start .changeI").text() != null && $(".start .changeI").text() != undefined && $(".start .changeI").text() != "") && ($(".end .changeI").text() != null && $(".end .changeI").text() != undefined && $(".end .changeI").text() != "")) {
@@ -727,6 +770,8 @@ $('.e_t').change(function () {
             mint = ks_time.split(" ")[2];
     $(this).find(".timei").text(year + "-" + mont + "-" + aday + " " + hour + ":" + mint);
     sessionStorage.setItem("e_t", year + "-" + mont + "-" + aday + " " + hour + ":" + mint);
+    dataId = undefined;
+    $('.toChoose').text('系统自动分配');
     ent = sessionStorage.getItem("e_t");
     $(this).find(".timei").addClass('changeI');
     var inTime = $(".start .timei").text();
@@ -735,7 +780,7 @@ $('.e_t').change(function () {
 });
 
 
-//11.19待定
+//11.19待定  现金支付
 function moneyPay() {
     console.log("现金支付");
     var t1 = $(".start .changeI").text() + ":00";
@@ -750,6 +795,13 @@ function moneyPay() {
         if ($(".coupon").has("i").length != 0) {
             var f1 = $(".tg_g_o .orderFee i").text();
             var f2 = $(".coupon i").text();
+            //6.29临时判断一元停车活动
+            // if(f1<f2){
+            // 	$(".coupon i").text('0');
+            // 	f2 = 0;
+            // 	couponidstr="";
+            // }
+            //6.29临时需求
             $(".tg_g_o .reverse i").text((parseFloat(f1) - parseFloat(f2)).toFixed(0));
         } else {
             $(".tg_g_o .reverse i").text($(".tg_g_o .orderFee i").text());
@@ -761,9 +813,10 @@ function moneyPay() {
 }
 
 
-//----------------------------------------------
-//11.19待定
+//-----------------------选中积分支付调用下面的方法（liuli）---------------------
+//11.19待定 积分支付
 function jifenPay() {
+    // 用getParkSpaceNum()函数先查询车场剩余车位，如果有则支付，无则弹出暂无车位
     if (getParkSpaceNum()) {
         console.log("积分支付判断");
         var t1 = $(".start .changeI").text() + ":00";
@@ -789,11 +842,11 @@ $(".btn .orderBtn").click(function () {
     if (!Number($(this).attr("data-btn"))) {
         $(this).attr("data-btn", "1");
 
-        if ($(this).attr("data-type") == "0") {
+        if ($(this).attr("data-type") == "0") {  //直接用现金进行支付
             moneyPay();
-        } else if ($(this).attr("data-type") == "1-1") {
+        } else if ($(this).attr("data-type") == "1-1") { // 积分足够，直接进行支付
             jifenPay();
-        } else if ($(this).attr("data-type") == "1-2") {
+        } else if ($(this).attr("data-type") == "1-2") {  // 积分不足去充值
             var interval = setInterval(function () {
                 if (sessionStorage.getItem("payBack") == 0) {
                     var inTime = $(".start .timei").text();
@@ -804,7 +857,7 @@ $(".btn .orderBtn").click(function () {
             }, 200);
             sessionStorage.setItem("payBack", 1);
             window.location.href = "myCredit.html?myCredit=1&payBack=1";
-        } else if ($(this).attr("data-type") == "2") {
+        } else if ($(this).attr("data-type") == "2") {  // 支付宝支付
 
         } else {
             alert("此时段不可预定，请查看可预定时间段！");
@@ -840,7 +893,7 @@ $(".close").click(function () {
 })
 
 
-//可用******************现金下单
+//可用******************现金下单--------选择现金点击立即支付--------------------
 $(".tg_g_o .pay").click(function () {
     if (!Number($(this).attr("data-btn"))) {
         $(this).attr("data-btn", "1");
@@ -983,7 +1036,7 @@ $(".opera .pay").click(function () {
 historyajax();
 
 
-//12.03----------------------
+//12.03----------------------这是现金支付创建订单（liuli）--------------------
 function bookParkOrder(parkSeq, intime, realprice, vmobile, userId, carNumber, reserveType, outTime) {
     console.log("bookParkOrder");
     var bookParkOrdereResult = null;
@@ -991,7 +1044,7 @@ function bookParkOrder(parkSeq, intime, realprice, vmobile, userId, carNumber, r
         type: "post",
         dataType: "json",
         async: false,
-        url: url + "order/postBookParkOrder.do",
+        url: url + "order/postBookParkOrder",  // 这里去掉了接口末尾的.do(liuli)
         data: {
             parkSeq: parkSeq,
             intime: intime,
@@ -1001,6 +1054,7 @@ function bookParkOrder(parkSeq, intime, realprice, vmobile, userId, carNumber, r
             carNumber: carNumber,
             reserveType: reserveType,
             outTime: outTime,
+            spaceId: dataId
         },
         success: function (result) {
             bookParkOrdereResult = result;
@@ -1014,7 +1068,8 @@ function bookParkOrder(parkSeq, intime, realprice, vmobile, userId, carNumber, r
 }
 
 
-//获得支付id//type=0时判断orderType订单支付类型1：积分充值(无跳转)2：现金支付
+//获得支付id -------------这是现金支付调起微信支付（liuli）-----------------------
+// 积分充值及预订支付(沿用微信公众号支付,注意参数值)支付类型0直接支付1未支付订单支付2积分支付(积分充值传0)
 function getpayid(type, price, totalFee, outTradeNo, attach) {
     console.log("getpayid");
     var getpayidResult = null;
@@ -1059,7 +1114,7 @@ function weiXinPay(result, orderNo) {
             },
             function (res) {
                 WeixinJSBridge.log(res.err_msg);
-                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                if (res.err_msg == "get_brand_wcpay_request:ok") {  // 如果支付成功进入支付成功页面并传入订单id
                     $(".thickbox").css("top", "100%");
                     $(".thickbox").css("top", "100%");
                     location.href = "orderSuccess.html?orderid=" + orderNo;
@@ -1073,7 +1128,7 @@ function weiXinPay(result, orderNo) {
                     } else {
                         onBridgeReady();
                     }
-                } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                } else if (res.err_msg == "get_brand_wcpay_request:cancel") {// 如果未支付进入订单详情待支付状态
                     $(".thickbox").css("top", "100%");
                     $(".thickbox").css("top", "100%");
                     location.href = "orderDetail.html?orderid=" + orderNo;
@@ -1084,7 +1139,8 @@ function weiXinPay(result, orderNo) {
             });
 }
 
-//获得支付id//type=0时判断orderType订单支付类型1：积分充值(无跳转)2：现金支付
+//获得支付id  ------------------积分下单支付一起进行接口-----------------------------------
+// type=0时判断orderType订单支付类型1：积分充值(无跳转)2：现金支付
 function getBookPayOrder() {
     $.ajax({
         type: "post",
@@ -1103,6 +1159,7 @@ function getBookPayOrder() {
             openId: openId,
             carNumber: $(".carName .carno").attr("data-val"),
             reserveType: 2,
+            spaceId: dataId
         },
         success: function (result) {
             console.log(result);
@@ -1125,7 +1182,7 @@ function getBookPayOrder() {
     });
 }
 
-
+// 查询车场剩余车位,返回的数值就是剩余的车位数
 function getParkSpaceNum() {
     var resultOk;
     $.ajax({
@@ -1146,3 +1203,50 @@ function getParkSpaceNum() {
     });
     return resultOk;
 }
+
+//获得url参数开始
+function GetRequest() {
+    var url = location.search;//获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            // 使用decodeURI 解码就不会中文乱码
+            theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+        }
+    }
+    return theRequest;
+    return theRequest;
+}
+
+var dataType = GetRequest()['dataType'];
+var dataId = GetRequest()['dataId'];
+var dataName = GetRequest()['dataName'];
+var inTimeMap = GetRequest()['inTime'];
+var outTimeMap = GetRequest()['outTime'];
+
+console.log(dataType, dataName, dataId, inTimeMap);
+if (dataType != undefined && dataId != undefined && dataName != undefined) {
+    $('.toChoose').text(`${dataFloorName}层-${dataType} ${dataName}`)
+}
+// else{
+//     dataId = undefined;
+//     dataType = undefined;
+//     dataName = undefined;
+// }
+
+if (dataType != undefined && dataId != undefined) {  // 这表明已经选位（liuli）
+    $('.start .timei').text(inTimeMap);
+    $('.end .timei').text(outTimeMap);
+}
+
+//进入在线选位
+$(".chooseSpace").click(function () {
+    location.href = `${toUrl}.html?parkSeq=${parkSeq}`;
+    // if(dataType == undefined && dataId == undefined){  // 这表明未进去选位（liuli）
+    //     location.href = `${toUrl}.html?parkSeq=${parkSeq}`;
+    // }else{  // 这表明已经选位，想重新选择(liuli)
+    //     window.history.go(-1);
+    // }
+});
